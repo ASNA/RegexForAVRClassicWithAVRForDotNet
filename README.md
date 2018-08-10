@@ -62,7 +62,9 @@ Don't continue until you can launch the .NET Dev Prompt from Visual Studio and s
 
 .NET DLLs intended to be used by COM applications must have their class declaration marked with the `ComVisible` and `ClassInterface` attributes and public methods must be marked with the `ComVisible` attribute as shown below. They must also have a single, explicitly declared constructor (with no parameters). No constructors overloads are allowed; there is no opportunity to pass parameters to the constructor in COM. It's OK to use a namespace with your DLL (and you probably should if you also intend to use the DLL with AVR for .NET), but it won't be seen by COM. 
 
-This example exposes a public method named `Square` that returns the square value of two integers. Be careful with the data types you return from functions you intend to use with COM. It's best to stick with AVR for .NET's *Integer4, *Packed, *Zoned, and *String data types. The line continuations below are to keep the code narrow for publication purposes.
+> The class code shown here to create a .NET DLL for use with AVR Classic is almost laughably simple. However, .NET DLLs you want to use with AVR Classic can contain complex logic, DataGate file access, any of the [programming power available in the .NET Framework](https://docs.microsoft.com/en-us/dotnet/api/?view=netframework-4.7.1), and even display .NET Windows forms (with any of the 65+ Windows controls that .NET provides--or the 100s available from third parties!) from these DLLs. I know I said it here once already, but let it register that this DLL technique can be a *powerful* helper in building a bridge from COM to .NET for many ASNA AVR Classic customers. 
+
+This simple example exposes a public method named `Square` that returns the square value of two integers. Be careful with the data types you return from functions you intend to use with COM. It's best to stick with AVR for .NET's *Integer4, *Packed, *Zoned, and *String data types. The line continuations below are to keep the code narrow for publication purposes.
 
     Using System.Runtime.InteropServices
     Using System.Text.RegularExpressions
@@ -156,5 +158,27 @@ If you need to change the code for your .NET DLL:
 * Unregister the DLL with: `regasm /unregister <DLL name>` in a DOS command box started with administrator privileges  and with `RegAsm` in its path. Superstitiously, I always do this before making changes to the DLL's code.
 * Make changes to the .NET code and recompile the DLL. Once its compiled and tested, reregister it with `regasm /tlb /codebase <DLL name>` in a DOS command box started with administrator privileges  and with `RegAsm` in its path. 
 * Start AVR Classic again and load your project. It should recognize the changes.
+
+#### See the light  
+
+The more I worked on this article the more I realized its full import. It set out to provide a quite meatball technique for providing .NET regular expressions to AVR Classic. Along the way, it flipped on a hundred very bright lightbulbs.
+
+If you are an AVR Classic customer, the technique presented here doesn't just provide a way to extend the power of AVR Classic, it provides a way out of AVR Classic and a way to wean your business of COM dependencies. The COM world won't last forever. We don't know Microsoft's long-term plans for COM, and without trying to be too melodramatic, we're potentially one Windows update away from lots of broken AVR Classic code. We're nearly certain that day is very far away, but take to the bank that day is coming. Ask any third-party ActiveX vendor, all of whom have already experienced that day, what it's like.
+
+With a little planning and care, you could start today moving AVR Classic maintenance and enhancement work to .NET and start easing away from the potential business disruption that is COM (the COM model is 25 years old!). With care, you could craft a .NET class library/DLL structure that offers both UI facilities and business services. The business services could be used by both AVR Classic and AVR for .NET Windows forms today, and later provide the basis for longer-term RESTful services for web or mobile development.
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+ 
 
 

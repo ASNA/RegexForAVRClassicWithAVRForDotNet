@@ -1,0 +1,44 @@
+﻿Using System
+Using System.Collections
+Using System.ComponentModel
+Using System.Data
+Using System.Drawing
+Using System.Text
+Using System.Windows.Forms
+
+DclNamespace DotNetStringHelper
+
+BegClass Form1 Extends(System.Windows.Forms.Form) Access(*Public) Partial(*Yes)
+
+	/region Default Constructor
+	
+	BegConstructor Access(*Public)
+		//
+		// Required for Windows Form Designer support
+		//
+		InitializeComponent()
+
+		//
+		// TODO: Add any constructor code after InitializeComponent call
+		//
+	EndConstructor
+
+	/endregion
+
+	BegSr Form1_Load Access(*Private) Event(*this.Load)
+		DclSrParm sender Type(*Object)
+		DclSrParm e Type(System.EventArgs)
+
+		// Occurs when form is first loaded.
+		// Put form "startup" code here (ie open files).
+	EndSr
+
+	BegSr Form1_FormClosing Access(*Private) Event(*This.FormClosing)
+		DclSrParm sender Type(*Object)
+		DclSrParm e Type(System.Windows.Forms.FormClosingEventArgs)
+
+		// Occurs when form is closing.
+		// Put form "housecleaning" code here (ie close files).
+	EndSr
+
+EndClass

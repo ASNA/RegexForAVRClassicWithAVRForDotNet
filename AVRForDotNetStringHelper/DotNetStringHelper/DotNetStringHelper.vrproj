@@ -33,9 +33,22 @@
     <Reference Include="ASNA.VisualRPG.Runtime" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form1.Designer.vr">
+      <SubType>Code</SubType>
+      <DependentUpon>Form1.vr</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.vr">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="RegExHelpers.vr" />
     <Compile Include="Properties\AssemblyInfo.vr" />
   </ItemGroup>
