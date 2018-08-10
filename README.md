@@ -44,7 +44,7 @@ Having added a new external tool, you can get to it directly from the Tools menu
 
 ![](https://asna.com/filebin/marketing/article-figures/runvstool.png?)
 
-When you run the .NET Dev Prompt, it will start in the current project's `bin\debug` folder. This is handy because that's where the DLL will be that you'll be registering. There are several other different arguments available for specifying the initial folder. For use with other commands you might want the DOS command box to open at a different folder. [See the full list of VS external tool arguments here](https://msdn.microsoft.com/en-us/library/76712d27.aspx).
+When you run the .NET Dev Prompt, it starts in the current project's `bin\debug` folder. This is handy because that's where the DLL will be that you'll be registering. There are several other different arguments available for specifying the initial folder. For use with other commands you might want the DOS command box to open at a different folder. [See the full list of VS external tool arguments here](https://msdn.microsoft.com/en-us/library/76712d27.aspx).
 
 > The `Arguments` value shown above specifies the fully qualified path to the `vsdevcmd.cmd` file for Visual Studio 2015. This file is provided with every version of Visual Studio. If you're using a version of Visual Studio other than 2015, be sure to use the location of your version's `vsdevcmd.cmd` for the `Arguments` value. A way to find yours is to open a DOS command box and change the path to `c:\Program Files (x86)`  and then type `dir vsdevcmd.bat /s` and press enter. This will list all occurrences of that file and their parent folders. 
 
@@ -62,7 +62,7 @@ Don't continue until you can launch the .NET Dev Prompt from Visual Studio and s
 
 .NET DLLs intended to be used by COM applications must have their class declaration marked with the `ComVisible` and `ClassInterface` attributes and public methods must be marked with the `ComVisible` attribute as shown below. They must also have a single, explicitly declared constructor (with no parameters). No constructors overloads are allowed; there is no opportunity to pass parameters to the constructor in COM. It's OK to use a namespace with your DLL (and you probably should if you also intend to use the DLL with AVR for .NET), but it won't be seen by COM. 
 
-> The class code shown here to create a .NET DLL for use with AVR Classic is almost laughably simple. However, .NET DLLs you want to use with AVR Classic can contain complex logic, DataGate file access, any of the [programming power available in the .NET Framework](https://docs.microsoft.com/en-us/dotnet/api/?view=netframework-4.7.1), and even display .NET Windows forms (with any of the 65+ Windows controls that .NET provides--or the 100s available from third parties!) from these DLLs. I know I said it here once already, but let it register that this DLL technique can be a *powerful* helper in building a bridge from COM to .NET for many ASNA AVR Classic customers. 
+> The class code shown here to create a .NET DLL for use with AVR Classic is almost laughably simple. However, .NET DLLs you want to use with AVR Classic can contain complex logic, DataGate file access, any of the [programming power available in the .NET Framework](https://docs.microsoft.com/en-us/dotnet/api/?view=netframework-4.7.1), and even display .NET Windows forms (with any of the 65+ Windows controls that .NET provides--or the 100s available from third parties!) from these DLLs. I know I said it here once already, but let it register that this DLL technique can be a *powerful* helper in building a bridge from COM to .NET for many ASNA AVR Classic customers. A follow-up article will focus on adding more sophisticated power to AVR Classic with AVR for .NET.
 
 This simple example exposes a public method named `Square` that returns the square value of two integers. Be careful with the data types you return from functions you intend to use with COM. It's best to stick with AVR for .NET's *Integer4, *Packed, *Zoned, and *String data types. The line continuations below are to keep the code narrow for publication purposes.
 
@@ -85,7 +85,7 @@ This simple example exposes a public method named `Square` that returns the squa
         EndFunc 
     EndClass        
 
-Keep the classes you create for COM consumption as simple as possible. Events, overloaded functions, returning complex types from functions, and pretty much anything beyond returning simple types will most likely lead to problems. Keep it simple, Sam! Also, be sure to thoroughly test your .NET libraries with .NET code before you try to use them in AVR Classic. Don't attempt to use a .NET DLL with AVR Classic until you are sure the DLL works as expected. You can't easily debug .NET code when called from from AVR Classic.
+Keep the classes you create for COM consumption as simple as possible. Be careful using events, overloaded functions, and returning complex types. Keep it simple, Sam! Also, be sure to thoroughly test your .NET libraries with .NET code before you try to use them in AVR Classic. Don't attempt to use a .NET DLL with AVR Classic until you are sure the DLL works as expected. You can't easily debug .NET code when called from from AVR Classic.
 
 ##### Change AssemblyInfo
 
@@ -146,7 +146,7 @@ At this point, you've done the hard work, all that remains is the simple code ne
 	DclFld ComTestLib Type(ComTest.Math) 
 	DclFld sqr Type(*Integer) Len(4) 
 
-	sqr = ComTestLib.Square(4,4) //sqr will be 16!
+	sqr = ComTestLib.Square(4,4) //sqr will be 16.
 
 There are no special instructions for using the DLL with AVR for .NET; just add a reference to the DLL and it's ready to go. 
 

@@ -7,17 +7,6 @@ BegClass RegExHelpers Access(*Public)  +
  Attributes(ComVisible(*True), +
    ClassInterface(ClassInterfaceType.AutoDual))
 
-    BegFunc ShowForm Access(*Public) Type(*Integer4) +
-                    Attributes(ComVisible(*True)) 
-
-        DclFld f Type(Form1) New()
-
-        f.Show()
-
-
-        LeaveSr 1
-    EndFunc 
-
     BegFunc Match Access(*Public) Type(*Integer4) +
                     Attributes(ComVisible(*True)) 
         DclSrParm Source Type(*String) 
@@ -60,7 +49,5 @@ BegClass RegExHelpers Access(*Public)  +
 
         LeaveSr Result 
     EndFunc 
-
-
 
 EndClass
