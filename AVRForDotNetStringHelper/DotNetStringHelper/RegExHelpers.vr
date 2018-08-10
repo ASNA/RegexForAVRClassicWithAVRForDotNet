@@ -1,0 +1,55 @@
+﻿Using System.Runtime.InteropServices
+Using System.Text.RegularExpressions
+
+DclNamespace DotNetStringHelper
+
+BegClass RegExHelpers Access(*Public)  +
+ Attributes(ComVisible(*True), +
+   ClassInterface(ClassInterfaceType.AutoDual))
+
+    BegFunc Match Access(*Public) Type(*Integer4) +
+                    Attributes(ComVisible(*True)) 
+        DclSrParm Source Type(*String) 
+        DclSrParm RegExp Type(*String) 
+        DclSrParm IgnoreCase Type(*Boolean) 
+
+        DclFld m Type(Match) 
+
+        Try
+            If IgnoreCase 
+                m = Regex.Match(Source, RegExp, RegExOptions.IgnoreCase)
+            Else 
+                m = Regex.Match(Source, RegExp)
+            EndIf 
+            
+            If m.Success 
+                LeaveSr 1
+            Else
+                LeaveSr 0 
+            EndIf 		
+        Catch ex Type(System.Exception) 
+            LeaveSr -1
+        EndTry 
+    EndFunc 
+
+    BegFunc Replace Access(*Public) Type(*String) +
+                      Attributes(ComVisible(*True)) 
+        DclSrParm Source Type(*String) 
+        DclSrParm Search Type(*String) 
+        DclSrParm Replacement Type(*String) 
+        DclSrParm IgnoreCase Type(*Boolean) 
+
+        DclFld Result Type(*String) 
+
+        If IgnoreCase
+            Result = Regex.Replace(Source, Search, Replacement, RegexOptions.IgnoreCase)     
+        Else        
+            Result = Regex.Replace(Source, Search, Replacement)    
+        EndIf 
+
+        LeaveSr Result 
+    EndFunc 
+
+
+
+EndClass
